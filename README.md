@@ -25,8 +25,7 @@ get these, so simplest is to just run the example provided by symbiflow
 once 'in-tree'; inside the `symbiflow-arch-defs/build` directory do:
 
 ```
-cd xc7/tests/counter  # assuming already in build/ directory
-make counter_basys3_prog  # to generate bit file program board with it
+make -C xc7/tests/counter counter_basys3_prog
 ```
 
 Now we're ready to use the Makefile provided here. Build and send to board with
@@ -39,6 +38,12 @@ The tools, such as yosys and vpr are used from the symbiflow conda
 packages; see Makefile what environment variables to set to point to your
 own versions of these binaries.
 
-Target here is an Artix-7 Digilent BASYS3 board.
+Target here is an Artix-7 Digilent BASYS3 board. If you can't access the
+device as non-root, add a udev rules file.
+
+```
+$ cat /etc/udev/rules.d/99-digilent-basys3.rules
+SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE="0666"
+```
 
 [symbiflow-arch-defs]: https://github.com/SymbiFlow/symbiflow-arch-defs
