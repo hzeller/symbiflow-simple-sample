@@ -1,8 +1,11 @@
+# This is from symbiflow-arch-defs examples
 yosys -import
 
 # -flatten is used to ensure that the output eblif has only one module.
 # Some of symbiflow expects eblifs with only one module.
-synth_xilinx -vpr -flatten
+synth_xilinx -vpr -flatten -nosrl
+
+#write_verilog $::env(OUT_SYNTH_V).premap.v  # Is this needed for anything ?
 
 # Map Xilinx tech library to 7-series VPR tech library.
 read_verilog -lib $::env(symbiflow_arch_defs_SOURCE_DIR)/xc7/techmap/cells_sim.v
@@ -30,4 +33,4 @@ if { [info exists ::env(USE_LUT_CONSTANTS)] } {
       -undef VCC VCC \
     $::env(OUT_EBLIF)
 }
-# write_verilog $::env(OUT_SYNTH_V)  # Is this needed for anything ?
+#write_verilog $::env(OUT_SYNTH_V)  # Is this needed for anything ?
