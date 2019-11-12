@@ -3,7 +3,7 @@ yosys -import
 
 # -flatten is used to ensure that the output eblif has only one module.
 # Some of symbiflow expects eblifs with only one module.
-synth_xilinx -vpr -flatten -nosrl
+synth_xilinx -vpr -flatten -abc9 -nosrl -noclkbuf -nodsp
 
 #write_verilog $::env(OUT_SYNTH_V).premap.v  # Is this needed for anything ?
 
